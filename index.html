@@ -382,6 +382,10 @@ table.rankings-table{width:100%;border-collapse:collapse;min-width:680px;backgro
 .rankings-table td.rk-points{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:16px}
 .rk-player-link{color:var(--navy);font-weight:700;text-decoration:none;border-bottom:2px solid rgba(26,42,74,.15);transition:all .15s;cursor:pointer;padding-bottom:1px}
 .rk-player-link:hover{color:#1565c0;border-bottom-color:#1565c0}
+.rk-player-link .rk-arrow{opacity:.55;transition:all .15s}
+.rk-player-link:hover .rk-arrow{opacity:1;transform:translateX(2px)}
+.rk-player-plain{color:var(--navy);font-weight:400;opacity:.75}
+.rk-mobile-name-plain{font-weight:400 !important;opacity:.75}
 .rk-achv{font-weight:700;font-size:12.5px;letter-spacing:.3px}
 .rk-achv.winner{color:var(--red)}
 .rk-achv.runner-up{color:var(--navy)}
@@ -1009,12 +1013,19 @@ function renderRankingsTable(players,bodyId,mobileListId){
   players.forEach((p,i)=>{
     const achvClass=p.achievement.toLowerCase().replace(/\s+/g,'-');
     const isWinner=achvClass==='winner';
+    const isComplete=p.dominantHand!=='Not yet provided';
     const playerHref='#player='+encodeURIComponent(p.slug);
+    const nameCell=isComplete
+      ?'<a class="rk-player-link" href="'+playerHref+'" target="_blank" rel="noopener">'+p.name+' <span class="rk-arrow">→</span></a>'
+      :'<span class="rk-player-plain">'+p.name+'</span>';
+    const nameCellMobile=isComplete
+      ?'<a class="rk-mobile-name" href="'+playerHref+'" target="_blank" rel="noopener">'+p.name+' <span class="rk-arrow">→</span></a>'
+      :'<span class="rk-mobile-name rk-mobile-name-plain">'+p.name+'</span>';
     const tr=document.createElement('tr');
     if(isWinner)tr.classList.add('rk-winner-row');
     const pointsStyle=isWinner?'style="color:var(--red)"':'';
     tr.innerHTML='<td>'+(i+1)+'</td>'+
-      '<td><a class="rk-player-link" href="'+playerHref+'" target="_blank" rel="noopener">'+p.name+'</a></td>'+
+      '<td>'+nameCell+'</td>'+
       '<td>'+p.league+'</td>'+
       '<td>'+p.category+'</td>'+
       '<td>'+p.duration+'</td>'+
@@ -1027,7 +1038,7 @@ function renderRankingsTable(players,bodyId,mobileListId){
       card.className='rk-mobile-card'+(isWinner?' rk-winner-row':'');
       card.innerHTML='<div class="rk-mobile-rank">'+p.rank+'</div>'+
         '<div class="rk-mobile-main">'+
-          '<a class="rk-mobile-name" href="'+playerHref+'" target="_blank" rel="noopener">'+p.name+'</a>'+
+          nameCellMobile+
           '<div class="rk-mobile-meta">'+p.category+' · '+p.duration+'</div>'+
         '</div>'+
         '<div class="rk-mobile-side">'+
