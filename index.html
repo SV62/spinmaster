@@ -949,11 +949,11 @@ const SMTL1000_LEAGUE='SMTL 1000: Season 1 (Advanced)';
 const SMTL1000_DURATION='Apr - Jun 2026';
 const PLAYERS=[
   {name:'Rajiv Philip',achievement:'Winner',points:25,rank:1,dominantHand:'Right-Handed',experience:'12+ years',favouriteSurface:'Clay',playingStyle:'All-Court Player',highlights:['Winner — SMTL 1000: Advanced Singles, Season 1 (2026)']},
-  {name:'Amit Shinde',achievement:'Runner-Up',points:21,rank:2},
-  {name:'Prashant Gandhi',achievement:'Semi Final',points:17,rank:3},
-  {name:'Promit Sen',achievement:'Semi Final',points:17,rank:3},
-  {name:"Floyd D'Souza",achievement:'Quarter Final',points:11,rank:4},
-  {name:'Karthik Chauhan',achievement:'Quarter Final',points:11,rank:4},
+  {name:'Amit Shinde',achievement:'Runner-Up',points:21,rank:2,dominantHand:'Right-Handed',experience:'11–20 years',favouriteSurface:'Hard Court',playingStyle:'Power Player',signatureShot:'First Serve',highlights:['ITF Singles & Doubles Winner']},
+  {name:'Prashant Gandhi',achievement:'Semi Final',points:17,rank:3,dominantHand:'Right-Handed',experience:'11–20 years',favouriteSurface:'Hard Court',playingStyle:'Power Player',signatureShot:'Power Play'},
+  {name:'Promit Sen',achievement:'Semi Final',points:17,rank:3,dominantHand:'Right-Handed',experience:'11–20 years',favouriteSurface:'Hard Court',playingStyle:'All-Court Player',signatureShot:'Passing Shot',highlights:['Winner of club level tournaments']},
+  {name:"Floyd D'Souza",achievement:'Quarter Final',points:11,rank:4,dominantHand:'Right-Handed',experience:'11–20 years',favouriteSurface:'Hard Court',playingStyle:'Aggressive Baseliner',signatureShot:'Forehand',highlights:['Winner of club level tournaments']},
+  {name:'Karthik Chauhan',achievement:'Quarter Final',points:11,rank:4,dominantHand:'Right-Handed',experience:'11–20 years',favouriteSurface:'Hard Court',playingStyle:'Serve & Volley',signatureShot:'Volley'},
   {name:'Sameer Samant',achievement:'Quarter Final',points:11,rank:4},
   {name:'Renjith Nair',achievement:'Quarter Final',points:9,rank:5},
   {name:'Ebrahim Machhiwala',achievement:'Group stage',points:8,rank:6,dominantHand:'Right-Handed',experience:'11–20 years',favouriteSurface:'Hard Court',playingStyle:'Aggressive Baseliner',signatureShot:'All-Court Game',photoPosition:'center 30%',strengths:['Topspin forehand and backhand','Competitive background — college, club, state and junior tennis'],highlights:['Winner — Doubles, Club Tournament','Runner-Up — Singles, Topspin Tournament']},
@@ -969,7 +969,8 @@ const PLAYERS=[
   {name:'Amine Khoury',achievement:'Group stage',points:2,rank:10},
   {name:'Keshav Dev',achievement:'Group stage',points:0,rank:11},
   {name:'Seyed Hejazi',achievement:'Participant',points:0,rank:12,playingCategory:'Intermediate',dominantHand:'Right-Handed',experience:'20+ years',favouriteSurface:'Clay',playingStyle:'Serve & Volley',signatureShot:'Volley'},
-  {name:'Dheeraj Negi',achievement:'Participant',points:0,rank:12,dominantHand:'Right-Handed',experience:'11–20 years',favouriteSurface:'Hard Court',playingStyle:'First-Strike Player',signatureShot:'Forehand',highlights:['Recreational player — new to SMTL, no prior season played']}
+  {name:'Dheeraj Negi',achievement:'Participant',points:0,rank:12,dominantHand:'Right-Handed',experience:'11–20 years',favouriteSurface:'Hard Court',playingStyle:'First-Strike Player',signatureShot:'Forehand',highlights:['Recreational player — new to SMTL, no prior season played']},
+  {name:'Bhavin Madnani',achievement:'Participant',points:0,rank:12}
 ].map(p=>Object.assign({
   slug:p.name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,''),
   league:SMTL1000_LEAGUE,category:'Singles',duration:SMTL1000_DURATION,
