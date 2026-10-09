@@ -433,6 +433,7 @@ table.rankings-table{width:100%;border-collapse:collapse;min-width:680px;backgro
 .pp-rank-item label{display:block;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:3px}
 .pp-val{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;color:var(--lime)}
 .pp-stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:26px}
+.pp-stats-grid-5{grid-template-columns:1fr 1fr 1fr}
 .pp-stat-box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:13px 14px}
 .pp-stat-icon{font-size:17px;margin-bottom:5px}
 .pp-stat-box label{display:block;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:4px}
@@ -455,7 +456,7 @@ table.rankings-table{width:100%;border-collapse:collapse;min-width:680px;backgro
 .pp-photo-foot-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
 .pp-photo-foot-tag{background:rgba(141,198,63,.1);border:1px solid rgba(141,198,63,.2);color:var(--lime);font-size:10px;font-weight:600;letter-spacing:1px;padding:3px 8px;border-radius:2px;text-transform:uppercase}
 @media(max-width:900px){.pp-wrap{grid-template-columns:1fr}.pp-right{order:-1;min-height:300px}.pp-photo{min-height:280px;font-size:70px}}
-@media(max-width:560px){.pp-stats-grid{grid-template-columns:1fr 1fr}.pp-rank-strip{flex-wrap:wrap}.pp-rank-item{flex:1 1 30%}}
+@media(max-width:560px){.pp-stats-grid{grid-template-columns:1fr 1fr}.pp-stats-grid-5{grid-template-columns:1fr 1fr}.pp-rank-strip{flex-wrap:wrap}.pp-rank-item{flex:1 1 30%}}
 .pp-about{font-size:14px;line-height:1.75;color:rgba(255,255,255,.75);font-weight:500;margin-bottom:6px}
 .zoomable-img{cursor:zoom-in}
 .lightbox-overlay{display:none;position:fixed;inset:0;background:rgba(8,12,20,.93);z-index:9999;align-items:center;justify-content:center;padding:40px;cursor:zoom-out}
@@ -774,9 +775,10 @@ table.rankings-table{width:100%;border-collapse:collapse;min-width:680px;backgro
         <div class="pp-rank-item"><label>Points</label><div class="pp-val" id="playerPoints">—</div></div>
         <div class="pp-rank-item"><label>Result</label><div class="pp-val" id="playerAchievement">—</div></div>
       </div>
-      <div class="pp-stats-grid">
+      <div class="pp-stats-grid pp-stats-grid-5">
         <div class="pp-stat-box"><div class="pp-stat-icon">🖐</div><label>Dominant Hand</label><div class="pp-sv" id="playerHand">—</div></div>
         <div class="pp-stat-box"><div class="pp-stat-icon">⚡</div><label>Playing Style</label><div class="pp-sv" id="playerStyle">—</div></div>
+        <div class="pp-stat-box"><div class="pp-stat-icon">🎯</div><label>Signature Shot</label><div class="pp-sv" id="playerShot">—</div></div>
         <div class="pp-stat-box"><div class="pp-stat-icon">🏅</div><label>Experience</label><div class="pp-sv" id="playerExperience">—</div></div>
         <div class="pp-stat-box"><div class="pp-stat-icon">🎾</div><label>Fav. Surface</label><div class="pp-sv" id="playerSurface">—</div></div>
       </div>
@@ -785,7 +787,6 @@ table.rankings-table{width:100%;border-collapse:collapse;min-width:680px;backgro
       <div class="pp-section-lbl">Career Highlights</div>
       <ul class="pp-list pp-highlights" id="playerHighlights"></ul>
       <div class="pp-foot">
-        <div class="pp-foot-item"><label>Signature Shot</label><div class="pp-fv" id="playerShot">—</div></div>
         <div class="pp-foot-item"><label>Category</label><div class="pp-fv" id="playerCategory2">—</div></div>
         <div class="pp-foot-item"><label>Duration</label><div class="pp-fv" id="playerDuration">—</div></div>
       </div>
