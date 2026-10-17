@@ -251,6 +251,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(26,42,74,0.
 .league-meta-item label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.32)}
 .league-meta-item p{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;color:var(--lime)}
 .league-badge{background:var(--red);color:#fff;padding:13px 26px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;white-space:nowrap;text-decoration:none;display:inline-block}
+.season-tabs{display:flex;gap:10px;margin-bottom:18px}
+.season-tab{padding:9px 22px;border-radius:30px;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;border:1.5px solid var(--light-gray);color:var(--navy);background:#fff;transition:all .15s;user-select:none}
+.season-tab:hover{border-color:var(--navy)}
+.season-tab.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.season-panel{display:none}
+.season-panel.active{display:block}
+.season-placeholder{background:var(--off-white);border:1.5px dashed var(--light-gray);border-radius:8px;padding:54px 30px;text-align:center}
+.season-placeholder h3{font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:700;color:var(--navy);text-transform:uppercase;margin-bottom:9px}
+.season-placeholder p{color:var(--gray);font-size:14px;max-width:440px;margin:0 auto;line-height:1.6}
 .tourn-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:28px}
 .tourn-card{border-radius:8px;overflow:hidden;border:1px solid #e9ecef}
 .tourn-card-header{padding:22px;background:var(--navy)}
@@ -683,73 +692,111 @@ table.rankings-table{width:100%;border-collapse:collapse;min-width:680px;backgro
 <div id="page-tournaments" class="page-section">
   <div class="tourn-hero" id="tournHero"><div class="tourn-hero-overlay"></div><div class="tourn-hero-content"><div class="eyebrow">Competition</div><h1>Tournaments &<br>Leagues</h1><p>Test your game in a real match environment — from in-house leagues to open competitions.</p></div></div>
   <div class="tournaments-wrap" style="padding-bottom:0">
-    <div class="league-banner" style="margin-bottom:0"><div><div class="eyebrow">Flagship Event</div><div class="league-title">Spinmasters Tennis<br>League — SMTL 1000</div><div class="league-sub">Our highest-tier singles league for Advanced category players. Ranked draw, knockout rounds and a live season leaderboard.</div><div class="league-meta"><div class="league-meta-item"><label>Season 1</label><p>Apr – Jun 2026</p></div><div class="league-meta-item"><label>Category</label><p>Advanced</p></div><div class="league-meta-item"><label>Format</label><p>Singles</p></div></div></div><a href="https://wa.me/971543712520" target="_blank" class="league-badge">Register Interest</a></div>
+    <div class="season-tabs">
+      <span class="season-tab active" data-league="1000" data-season="s1" onclick="showSeason(this)">Season 1</span>
+      <span class="season-tab" data-league="1000" data-season="s2" onclick="showSeason(this)">Season 2</span>
+    </div>
+    <div class="season-panel active" data-league="1000" data-season="s1">
+      <div class="league-banner" style="margin-bottom:0"><div><div class="eyebrow">Flagship Event</div><div class="league-title">Spinmasters Tennis<br>League — SMTL 1000</div><div class="league-sub">Our highest-tier singles league for Advanced category players. Ranked draw, knockout rounds and a live season leaderboard.</div><div class="league-meta"><div class="league-meta-item"><label>Season 1</label><p>Apr – Jun 2026</p></div><div class="league-meta-item"><label>Category</label><p>Advanced</p></div><div class="league-meta-item"><label>Format</label><p>Singles</p></div></div></div><a href="https://wa.me/971543712520" target="_blank" class="league-badge">Register Interest</a></div>
+    </div>
+    <div class="season-panel" data-league="1000" data-season="s2">
+      <div class="season-placeholder"><h3>SMTL 1000 — Season 2</h3><p>Dates for the next Advanced Singles draw haven't been announced yet. Check back soon, or register your interest and we'll let you know as soon as it's confirmed.</p></div>
+    </div>
   </div>
-  <div class="rankings-section">
-    <div class="rankings-inner">
-      <div class="rankings-brand">
-        <div class="rankings-brand-text">
-          <div class="rankings-brand-league">Spinmasters Tennis League</div>
-          <div class="rankings-brand-title">1000S: Advanced</div>
+  <div class="season-panel active" data-league="1000" data-season="s1">
+    <div class="rankings-section">
+      <div class="rankings-inner">
+        <div class="rankings-brand">
+          <div class="rankings-brand-text">
+            <div class="rankings-brand-league">Spinmasters Tennis League</div>
+            <div class="rankings-brand-title">1000S: Advanced</div>
+          </div>
         </div>
+        <p class="rankings-sub">Final standings · Season 1 (Apr – Jun 2026). Click a player's name to view their full profile.</p>
+        <div class="rankings-table-wrap">
+          <table class="rankings-table">
+            <thead><tr><th>#</th><th>Name</th><th>League</th><th>Category</th><th>Duration</th><th>Achievement</th><th>Points</th><th>Rank</th></tr></thead>
+            <tbody id="rankingsBody"></tbody>
+          </table>
+        </div>
+        <div class="rankings-mobile-list" id="rankingsMobileList"></div>
       </div>
-      <p class="rankings-sub">Final standings · Season 1 (Apr – Jun 2026). Click a player's name to view their full profile.</p>
-      <div class="rankings-table-wrap">
-        <table class="rankings-table">
-          <thead><tr><th>#</th><th>Name</th><th>League</th><th>Category</th><th>Duration</th><th>Achievement</th><th>Points</th><th>Rank</th></tr></thead>
-          <tbody id="rankingsBody"></tbody>
-        </table>
+      <div class="rankings-tagline">
+        <span class="rl-star">★</span>
+        <span>Play Hard</span>
+        <span class="rl-star">|</span>
+        <span>Respect All</span>
+        <span class="rl-star">|</span>
+        <span>Enjoy Tennis</span>
+        <span class="rl-star">★</span>
       </div>
-      <div class="rankings-mobile-list" id="rankingsMobileList"></div>
-    </div>
-    <div class="rankings-tagline">
-      <span class="rl-star">★</span>
-      <span>Play Hard</span>
-      <span class="rl-star">|</span>
-      <span>Respect All</span>
-      <span class="rl-star">|</span>
-      <span>Enjoy Tennis</span>
-      <span class="rl-star">★</span>
     </div>
   </div>
+  <div class="season-panel" data-league="1000" data-season="s2"></div>
   <div class="tournaments-wrap" style="padding-top:28px">
-    <div class="league-banner"><div><div class="eyebrow">Flagship Event</div><div class="league-title">Spinmasters Tennis<br>League — SMTL 500</div><div class="league-sub">In-house competitive league open to all registered members. Singles and doubles across ability levels.</div><div class="league-meta"><div class="league-meta-item"><label>Season 2</label><p>Dates TBC</p></div><div class="league-meta-item"><label>Format</label><p>Singles & Doubles</p></div><div class="league-meta-item"><label>Venue</label><p>Al Nasr, Dubai</p></div></div></div><a href="https://wa.me/971543712520" target="_blank" class="league-badge">Register Interest</a></div>
-    <div class="tourn-cards">
-      <div class="tourn-card"><div class="tourn-card-header"><div class="tourn-card-type">Ongoing · Members</div><div class="tourn-card-name">SMTL 500 Singles</div></div><div class="tourn-card-body"><div class="tourn-detail"><div class="tourn-detail-icon">📅</div>Monthly rounds</div><div class="tourn-detail"><div class="tourn-detail-icon">👥</div>Open to all members</div><div class="tourn-detail"><div class="tourn-detail-icon">🎯</div>Ranked draw format</div><div class="tourn-prizes"><label>Awards</label><div class="prize-row"><span>Winner</span><span>Gold Trophy + Medal</span></div><div class="prize-row"><span>Runner-up</span><span>Silver Trophy + Medal</span></div><div class="prize-row"><span>3rd Place</span><span>Bronze Medal</span></div></div></div></div>
-      <div class="tourn-card"><div class="tourn-card-header"><div class="tourn-card-type">Ongoing · Members</div><div class="tourn-card-name">SMTL 500 Doubles</div></div><div class="tourn-card-body"><div class="tourn-detail"><div class="tourn-detail-icon">📅</div>Monthly rounds</div><div class="tourn-detail"><div class="tourn-detail-icon">👥</div>Pairs — any level</div><div class="tourn-detail"><div class="tourn-detail-icon">🎯</div>Round robin + finals</div><div class="tourn-prizes"><label>Awards</label><div class="prize-row"><span>Winner Pair</span><span>Gold Trophy + Medal</span></div><div class="prize-row"><span>Runner-up Pair</span><span>Silver Trophy + Medal</span></div></div></div></div>
-      <div class="tourn-card"><div class="tourn-card-header"><div class="tourn-card-type">Coming Soon</div><div class="tourn-card-name">Junior Open</div></div><div class="tourn-card-body"><div class="tourn-detail"><div class="tourn-detail-icon">📅</div>Quarterly — dates TBC</div><div class="tourn-detail"><div class="tourn-detail-icon">👦</div>Ages 8–15 categories</div><div class="tourn-detail"><div class="tourn-detail-icon">🎯</div>ITF junior pathway</div><div class="tourn-prizes"><label>Categories</label><div class="prize-row"><span>U10</span><span>Red ball</span></div><div class="prize-row"><span>U12</span><span>Orange ball</span></div><div class="prize-row"><span>U15</span><span>Full court</span></div></div></div></div>
+    <div class="season-tabs">
+      <span class="season-tab active" data-league="500" data-season="s1" onclick="showSeason(this)">Season 1</span>
+      <span class="season-tab" data-league="500" data-season="s2" onclick="showSeason(this)">Season 2</span>
     </div>
-  <div class="rankings-section">
-    <div class="rankings-inner">
-      <div class="rankings-brand">
-        <div class="rankings-brand-text">
-          <div class="rankings-brand-league">Spinmasters Tennis League</div>
-          <div class="rankings-brand-title">500S: Intermediate</div>
-        </div>
+    <div class="season-panel active" data-league="500" data-season="s1">
+      <div class="league-banner"><div><div class="eyebrow">Flagship Event</div><div class="league-title">Spinmasters Tennis<br>League — SMTL 500</div><div class="league-sub">In-house competitive league open to all registered members. Singles and doubles across ability levels.</div><div class="league-meta"><div class="league-meta-item"><label>Season 1</label><p>Apr – Jun 2026</p></div><div class="league-meta-item"><label>Format</label><p>Singles & Doubles</p></div><div class="league-meta-item"><label>Venue</label><p>Al Nasr, Dubai</p></div></div></div><a href="https://wa.me/971543712520" target="_blank" class="league-badge">Register Interest</a></div>
+      <div class="tourn-cards">
+        <div class="tourn-card"><div class="tourn-card-header"><div class="tourn-card-type">Ongoing · Members</div><div class="tourn-card-name">SMTL 500 Singles</div></div><div class="tourn-card-body"><div class="tourn-detail"><div class="tourn-detail-icon">📅</div>Monthly rounds</div><div class="tourn-detail"><div class="tourn-detail-icon">👥</div>Open to all members</div><div class="tourn-detail"><div class="tourn-detail-icon">🎯</div>Ranked draw format</div><div class="tourn-prizes"><label>Awards</label><div class="prize-row"><span>Winner</span><span>Gold Trophy + Medal</span></div><div class="prize-row"><span>Runner-up</span><span>Silver Trophy + Medal</span></div><div class="prize-row"><span>3rd Place</span><span>Bronze Medal</span></div></div></div></div>
+        <div class="tourn-card"><div class="tourn-card-header"><div class="tourn-card-type">Ongoing · Members</div><div class="tourn-card-name">SMTL 500 Doubles</div></div><div class="tourn-card-body"><div class="tourn-detail"><div class="tourn-detail-icon">📅</div>Monthly rounds</div><div class="tourn-detail"><div class="tourn-detail-icon">👥</div>Pairs — any level</div><div class="tourn-detail"><div class="tourn-detail-icon">🎯</div>Round robin + finals</div><div class="tourn-prizes"><label>Awards</label><div class="prize-row"><span>Winner Pair</span><span>Gold Trophy + Medal</span></div><div class="prize-row"><span>Runner-up Pair</span><span>Silver Trophy + Medal</span></div></div></div></div>
+        <div class="tourn-card"><div class="tourn-card-header"><div class="tourn-card-type">Coming Soon</div><div class="tourn-card-name">Junior Open</div></div><div class="tourn-card-body"><div class="tourn-detail"><div class="tourn-detail-icon">📅</div>Quarterly — dates TBC</div><div class="tourn-detail"><div class="tourn-detail-icon">👦</div>Ages 8–15 categories</div><div class="tourn-detail"><div class="tourn-detail-icon">🎯</div>ITF junior pathway</div><div class="tourn-prizes"><label>Categories</label><div class="prize-row"><span>U10</span><span>Red ball</span></div><div class="prize-row"><span>U12</span><span>Orange ball</span></div><div class="prize-row"><span>U15</span><span>Full court</span></div></div></div></div>
       </div>
-      <p class="rankings-sub">Final standings · Season 1 (Apr – Jun 2026). Click a player's name to view their full profile.</p>
-      <div class="rankings-table-wrap">
-        <table class="rankings-table">
-          <thead><tr><th>#</th><th>Name</th><th>League</th><th>Category</th><th>Duration</th><th>Achievement</th><th>Points</th><th>Rank</th></tr></thead>
-          <tbody id="rankingsBody500"></tbody>
-        </table>
-      </div>
-      <div class="rankings-mobile-list" id="rankingsMobileList500"></div>
     </div>
-    <div class="rankings-tagline">
-      <span class="rl-star">★</span>
-      <span>Play Hard</span>
-      <span class="rl-star">|</span>
-      <span>Respect All</span>
-      <span class="rl-star">|</span>
-      <span>Enjoy Tennis</span>
-      <span class="rl-star">★</span>
+    <div class="season-panel" data-league="500" data-season="s2">
+      <div class="league-banner"><div><div class="eyebrow">Next Up</div><div class="league-title">Spinmasters Tennis<br>League — SMTL 500</div><div class="league-sub">In-house competitive league open to all registered members. Singles and doubles across ability levels.</div><div class="league-meta"><div class="league-meta-item"><label>Season 2</label><p>Dates TBC</p></div><div class="league-meta-item"><label>Format</label><p>Singles & Doubles</p></div><div class="league-meta-item"><label>Venue</label><p>Al Nasr, Dubai</p></div></div></div><a href="https://wa.me/971543712520" target="_blank" class="league-badge">Register Interest</a></div>
+      <div class="season-placeholder" style="margin-top:22px"><h3>Rankings Open When Season 2 Begins</h3><p>Fixtures, standings and results for SMTL 500 Season 2 will appear here once the season kicks off.</p></div>
     </div>
   </div>
-    <div class="league-banner" style="margin-bottom:0;margin-top:28px"><div><div class="eyebrow">Coming Soon</div><div class="league-title">Spinmasters Tennis<br>League — SMTL 250</div><div class="league-sub">Our entry-level league — a friendly, structured introduction to competitive match play for developing players.</div><div class="league-meta"><div class="league-meta-item"><label>Season 1</label><p>Dates TBC</p></div><div class="league-meta-item"><label>Category</label><p>Beginner</p></div><div class="league-meta-item"><label>Format</label><p>Singles</p></div></div></div><a href="https://wa.me/971543712520" target="_blank" class="league-badge">Register Interest</a></div>
+  <div class="season-panel active" data-league="500" data-season="s1">
+    <div class="rankings-section">
+      <div class="rankings-inner">
+        <div class="rankings-brand">
+          <div class="rankings-brand-text">
+            <div class="rankings-brand-league">Spinmasters Tennis League</div>
+            <div class="rankings-brand-title">500S: Intermediate</div>
+          </div>
+        </div>
+        <p class="rankings-sub">Final standings · Season 1 (Apr – Jun 2026). Click a player's name to view their full profile.</p>
+        <div class="rankings-table-wrap">
+          <table class="rankings-table">
+            <thead><tr><th>#</th><th>Name</th><th>League</th><th>Category</th><th>Duration</th><th>Achievement</th><th>Points</th><th>Rank</th></tr></thead>
+            <tbody id="rankingsBody500"></tbody>
+          </table>
+        </div>
+        <div class="rankings-mobile-list" id="rankingsMobileList500"></div>
+      </div>
+      <div class="rankings-tagline">
+        <span class="rl-star">★</span>
+        <span>Play Hard</span>
+        <span class="rl-star">|</span>
+        <span>Respect All</span>
+        <span class="rl-star">|</span>
+        <span>Enjoy Tennis</span>
+        <span class="rl-star">★</span>
+      </div>
+    </div>
+  </div>
+  <div class="season-panel" data-league="500" data-season="s2"></div>
+  <div class="tournaments-wrap" style="padding-top:28px">
+    <div class="season-tabs">
+      <span class="season-tab active" data-league="250" data-season="s1" onclick="showSeason(this)">Season 1</span>
+      <span class="season-tab" data-league="250" data-season="s2" onclick="showSeason(this)">Season 2</span>
+    </div>
+    <div class="season-panel active" data-league="250" data-season="s1">
+      <div class="league-banner" style="margin-bottom:0"><div><div class="eyebrow">Coming Soon</div><div class="league-title">Spinmasters Tennis<br>League — SMTL 250</div><div class="league-sub">Our entry-level league — a friendly, structured introduction to competitive match play for developing players.</div><div class="league-meta"><div class="league-meta-item"><label>Season 1</label><p>Dates TBC</p></div><div class="league-meta-item"><label>Category</label><p>Beginner</p></div><div class="league-meta-item"><label>Format</label><p>Singles</p></div></div></div><a href="https://wa.me/971543712520" target="_blank" class="league-badge">Register Interest</a></div>
+    </div>
+    <div class="season-panel" data-league="250" data-season="s2">
+      <div class="season-placeholder"><h3>SMTL 250 — Season 2</h3><p>Season 1 hasn't kicked off yet, so Season 2 is further down the road. We'll post updates here once Season 1 dates are confirmed.</p></div>
+    </div>
   </div>
   <div class="tourn-photos"><div class="eyebrow">Season 1 · June 2026</div><h3 class="tourn-photos-title">SMTL Season 1 — In Pictures</h3><div class="photo-mosaic" id="photoMosaic"></div></div>
-  <div class="winners-section"><div class="eyebrow">Hall of Fame</div><h2 class="section-title">SMTL 500 — Season 1 Winners</h2><div class="winners-grid"><div class="winner-card"><div class="winner-img-col" id="winnersImg"></div><div class="winner-info"><div class="winner-category">Season 1 — Finals Night</div><div class="winner-name">SMTL 500<br>Champion 2026</div><div class="winner-label">🏆 Season 1 Complete</div><p style="font-size:13px;color:var(--gray);margin-top:14px;line-height:1.6">June 14, 2026 · Al Nasr Sports Centre, Dubai<br>Trophies, medals and HEAD gear awarded across all categories.</p></div></div><div class="winner-card"><div class="winner-img-col" id="groupImg"></div><div class="winner-info"><div class="winner-category">All Participants</div><div class="winner-name">The Spinmasters<br>Community</div><div class="winner-label">Season 1 — Thank You</div><p style="font-size:13px;color:var(--gray);margin-top:14px;line-height:1.6">A celebration of tennis, community, and competition. Congratulations to everyone who made Season 1 a success.</p></div></div></div></div>
+  <div class="season-panel active" data-league="500" data-season="s1">
+    <div class="winners-section"><div class="eyebrow">Hall of Fame</div><h2 class="section-title">SMTL 500 — Season 1 Winners</h2><div class="winners-grid"><div class="winner-card"><div class="winner-img-col" id="winnersImg"></div><div class="winner-info"><div class="winner-category">Season 1 — Finals Night</div><div class="winner-name">SMTL 500<br>Champion 2026</div><div class="winner-label">🏆 Season 1 Complete</div><p style="font-size:13px;color:var(--gray);margin-top:14px;line-height:1.6">June 14, 2026 · Al Nasr Sports Centre, Dubai<br>Trophies, medals and HEAD gear awarded across all categories.</p></div></div><div class="winner-card"><div class="winner-img-col" id="groupImg"></div><div class="winner-info"><div class="winner-category">All Participants</div><div class="winner-name">The Spinmasters<br>Community</div><div class="winner-label">Season 1 — Thank You</div><p style="font-size:13px;color:var(--gray);margin-top:14px;line-height:1.6">A celebration of tennis, community, and competition. Congratulations to everyone who made Season 1 a success.</p></div></div></div></div>
+  </div>
 </div>
 
 <!-- OTHER SERVICES -->
@@ -927,6 +974,11 @@ function showPage(name,opts){
     if(location.hash!==target)location.hash=target;
   }
 }
+function showSeason(tabEl){
+  const league=tabEl.dataset.league, season=tabEl.dataset.season;
+  document.querySelectorAll('.season-tab[data-league="'+league+'"]').forEach(t=>t.classList.toggle('active', t===tabEl));
+  document.querySelectorAll('.season-panel[data-league="'+league+'"]').forEach(p=>p.classList.toggle('active', p.dataset.season===season));
+}
 function setBg(id,key,pos,zoomable){
   const el=document.getElementById(id);
   if(el&&IMGS[key]){
@@ -976,7 +1028,8 @@ const PLAYERS=[
   {name:'Keshav Dev',achievement:'Group stage',points:0,rank:11,dominantHand:'Left-Handed',experience:'20+ years',favouriteSurface:'Hard Court',playingStyle:'All-Court Player',signatureShot:'Touch & Feel',highlights:['Club level tournament']},
   {name:'Seyed Hejazi',achievement:'Participant',points:0,rank:12,dominantHand:'Right-Handed',experience:'20+ years',favouriteSurface:'Hard Court',playingStyle:'All-Court Player',signatureShot:'Forehand'},
   {name:'Dheeraj Negi',achievement:'Participant',points:0,rank:12,dominantHand:'Right-Handed',experience:'11–20 years',favouriteSurface:'Hard Court',playingStyle:'All-Court Player',signatureShot:'Court Coverage'},
-  {name:'Bhavin Madnani',achievement:'Participant',points:0,rank:12}
+  {name:'Bhavin Madnani',achievement:'Participant',points:0,rank:12},
+  {name:'Asad Razvi',achievement:'Participant',points:0,rank:12,dominantHand:'Left-Handed',experience:'11–20 years',favouriteSurface:'Clay',playingStyle:'Aggressive Baseliner',signatureShot:'All-Court Game',strengths:['Competitive background — college, club, state and junior tennis']}
 ].map(p=>Object.assign({
   slug:p.name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,''),
   league:SMTL1000_LEAGUE,category:'Singles',duration:SMTL1000_DURATION,
