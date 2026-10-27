@@ -6,7 +6,13 @@ The official website for **Spinmasters Tennis Academy**, Dubai's home for world-
 
 ## What's here
 
-This is a single-file website — all HTML, CSS and JavaScript (plus every image, embedded as base64) live in `index.html`. There's no build step, no dependencies, and no server required. It's a client-side single-page app: navigation between sections is handled entirely in JavaScript, so the whole site loads once and pages switch instantly.
+All HTML, CSS and JavaScript live in `index.html`; images live in `img/` and are referenced by absolute path (e.g. `/img/hero.jpg`), so each page only downloads the images it shows. There's no build step and no dependencies. It's a client-side single-page app: navigation between sections is handled in JavaScript, so pages switch instantly.
+
+### URLs
+
+Pages have clean URLs — `/coaches`, `/programs`, `/tournaments`, `/other-services`, `/player/<slug>` and `/coach/<slug>`. GitHub Pages has no real file at those paths, so `404.html` and the small `index.html` stubs in each page folder forward the visitor to `/?route=<path>`, and the app restores the original URL and opens the right page. Old `#tournaments` / `#player=<slug>` links are converted automatically.
+
+To add a new top-level page, add it to `PAGE_NAMES` and `PAGE_TITLES` in `index.html`, copy one of the stub folders, and add it to `sitemap.xml`.
 
 ### Pages
 
@@ -20,15 +26,11 @@ This is a single-file website — all HTML, CSS and JavaScript (plus every image
 
 No build tools needed — just open the file directly:
 
-```bash
-open index.html
-```
-
-Or serve it with any static file server if you'd rather use a URL than `file://`:
+Serve the folder with any static file server (images use absolute paths, so opening `index.html` via `file://` won't show them):
 
 ```bash
 python3 -m http.server 8000
-# then visit http://localhost:8000/index.html
+# then visit http://localhost:8000/
 ```
 
 ## Deployment
